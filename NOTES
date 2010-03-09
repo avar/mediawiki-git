@@ -1,0 +1,8 @@
+# Create a repo clone:
+git clone --no-hardlinks git-svn-clone extensions
+cd extensions
+git filter-branch --subdirectory-filter extensions -- --all
+
+# Push branches
+for i in $(git branch -l -a|grep -v tags/|grep '^  '|perl -pe 's/  //'|grep -v ^wikia$|grep -v origin); do git branch $i $i; done
+git push --all
